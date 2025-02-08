@@ -12,13 +12,19 @@ export default function Home() {
     timeZone: "Asia/Phnom_Penh",
   }).format(new Date(event.date[0]));
 
+  const time = new Date(event.date[0]);
+  const timezoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const timezoneOffset = time.getTimezoneOffset();
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <h1>default time :{event.date[0]}</h1>
         <div>
           <h1>Parents Side</h1>
-          <p>local datestring :{new Date(event.date[0]).toLocaleString()}</p>
+          <div>Current timezone: {timezoneName}</div>
+          <div>Timezone offset: {timezoneOffset} minutes</div>
+          <p>local datestring :{time.toLocaleString()}</p>
           <p>datefns: {format(new Date(event.date[0]), "dd-MM-yyyy")}</p>
           <p>time in phnom penh: {timeInPhnomPehn}</p>
         </div>
